@@ -12,20 +12,6 @@ class UsuarioController {
     cadastrarView (req, res) {
         res.render ('usuarios/cadastrar.ejs');
     }
-    cadastrar (req, res) {
-        if (req.body.nome && req.body.email && req.body.senha){
-            //ok
-            res.send({
-                deuCerto: true
-            })
-        }
-        else{
-            //campos incompletos
-            res.send ({
-                deuCerto: false
-            })
-        }
-    }
 }
 
 module.exports = UsuarioController
