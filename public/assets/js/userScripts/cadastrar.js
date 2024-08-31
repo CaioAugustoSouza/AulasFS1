@@ -13,14 +13,29 @@ document.addEventListener ('DOMContentLoaded', function (){
             nome: inputNome.value,
             email: inputEmail.value,
             senha: inputSenha.value,
-            ativo: cdAtivo.checked
+            ativo: cbAtivo.checked
         }
 
         let stringObj = JSON.stringify(obj);
 
-        fetch ()
-        .then(function (){
-            console.log ('fetch retornou');
+        fetch ('/usuarios/cadastrar', {
+            method: 'POST',
+            headers: {'Content-type' : 'application/json'},
+            body: stringObj
+        })
+        .then(function (resposta){
+            return resposta.json();
+        })
+        .then(function (resposta){
+            if (resposta.deuCerto) {
+                alert ('Ok');
+            }
+            else {
+                alert ('Erro!')
+            }
+        })
+        .catch (function(e){
+            console.error ('erro:'+ e);
         })
     }
 })
