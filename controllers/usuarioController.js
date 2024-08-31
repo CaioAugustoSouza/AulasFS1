@@ -13,7 +13,7 @@ class UsuarioController {
         res.render('usuarios/cadastrar.ejs');
     }
     cadastrar(req, res) {
-        if (req.body.nome && req.body.email && req.body.senha) {
+        if (req.body.inputNome && req.body.inputEmail && req.body.inputSenha) {
             res.send({
                 deuCerto: true
             })
