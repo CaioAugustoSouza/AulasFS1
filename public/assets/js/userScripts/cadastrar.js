@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function validarCampos() {
+        limparValidacao ();
         let listaCampos = [];
         let inputNome = document.getElementById('inputNome');
         let inputEmail = document.getElementById('inputEmail');
@@ -31,9 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 //outra opção de sintaxe
                 // listaCampos [i].style.borderColor = "red";
                 alert('Formulário não preenchido corretamente! Preencha corretamente os campos destacados!');
+                document.getElementById('msgErro').innerHTML = '<b>Preencha corretamente!</b>'
                 return false;
             }
         }
+    }
+
+    function limparValidacao (){
+        document.getElementById('msgErro') = ''
+        document.getElementById('inputEmail').style['border-color'] = '#697a8d;'
+        document.getElementById('inputNome').style['border-color'] = '#697a8d;'
+        document.getElementById('inputSenha').style['border-color'] = '#697a8d;'
+        document.getElementById('cbAtivo').style['border-color'] = '#697a8d;'
     }
 
     function cadastrar() {
@@ -41,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let inputNome = document.getElementById('inputNome');
         let inputEmail = document.getElementById('inputEmail');
         let inputSenha = document.getElementById('inputSenha');
+        let selPerfil = document.getElementById('selPerfil');
         let cbAtivo = document.getElementById('cbAtivo');
 
 
@@ -49,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 nome: inputNome.value,
                 email: inputEmail.value,
                 senha: inputSenha.value,
+                perfil: selPerfil.value, 
                 ativo: cbAtivo.checked
             }
 
@@ -63,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return resposta.json();
                 })
                 .then(function (resposta) {
-                    if (resposta.deuCerto) {
+                    if (resposta.ok) {
                         alert('Ok');
                     }
                     else {

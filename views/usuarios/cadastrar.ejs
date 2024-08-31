@@ -1,6 +1,9 @@
 <script src="/assets/js/userScripts/cadastrar.js"></script>
 
 <form>
+  <div style="color: red" id="msgErro">
+
+  </div>
   <div class="row mb-3">
     <label class="col-sm-2 col-form-label" for="inputNome">Nome</label>
     <div class="col-sm-10">
@@ -15,13 +18,15 @@
       </div>
     </div>
   </div>
-  <div>
-    <label for="">perfil</label>
-    <select class="form-control col-sm-2" name="selPerfil" id="selPerfil">
-      <option value="0">Selecione uma opção</option>
-      <option value="1">Admin</option>
-      <option value="2">Visitante</option>
-    </select>
+  <div class="row mb-3">
+    <label for="" class="col-sm-2 col-form-label">perfil</label>
+    <div class="col-sm-10">
+      <select class="form-select" name="selPerfil" id="selPerfil">
+        <option value="0">Selecione uma opção</option>
+        <option value="1">Admin</option>
+        <option value="2">Visitante</option>
+      </select>
+    </div>
   </div>
   <div class="row mb-3">
     <label class="col-sm-2 col-form-label" for="inputSenha">Senha</label>
