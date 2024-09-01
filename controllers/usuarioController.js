@@ -14,7 +14,7 @@ class UsuarioController {
     }
     cadastrar(req, res) {
         let ok;
-        if (req.body.inputNome && req.body.inputEmail && req.body.inputSenha && req.body.perfil > 0) {
+        if (req.body.nome && req.body.email && req.body.senha && req.body.perfil && req.body.perfil > 0) {
             ok = true
         }
         else {

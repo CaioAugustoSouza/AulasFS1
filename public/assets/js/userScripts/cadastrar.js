@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function validarCampos() {
-        limparValidacao ();
+        limparValidacao();
         let listaCampos = [];
         let inputNome = document.getElementById('inputNome');
         let inputEmail = document.getElementById('inputEmail');
@@ -38,12 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function limparValidacao (){
+    function limparValidacao() {
         document.getElementById('msgErro') = ''
         document.getElementById('inputEmail').style['border-color'] = '#697a8d;'
         document.getElementById('inputNome').style['border-color'] = '#697a8d;'
         document.getElementById('inputSenha').style['border-color'] = '#697a8d;'
-        document.getElementById('cbAtivo').style['border-color'] = '#697a8d;'
+        document.getElementById('selPerfil').style['border-color'] = '#697a8d;'
     }
 
     function cadastrar() {
@@ -55,36 +55,36 @@ document.addEventListener('DOMContentLoaded', function () {
         let cbAtivo = document.getElementById('cbAtivo');
 
 
-        if (validarCampos()) {
-            let obj = {
-                nome: inputNome.value,
-                email: inputEmail.value,
-                senha: inputSenha.value,
-                perfil: selPerfil.value, 
-                ativo: cbAtivo.checked
-            }
-
-            let stringObj = JSON.stringify(obj);
-
-            fetch('/usuarios/cadastrar', {
-                method: 'POST',
-                headers: { 'Content-type': 'application/json' },
-                body: stringObj
-            })
-                .then(function (resposta) {
-                    return resposta.json();
-                })
-                .then(function (resposta) {
-                    if (resposta.ok) {
-                        alert('Ok');
-                    }
-                    else {
-                        alert('Erro!')
-                    }
-                })
-                .catch(function (e) {
-                    console.error('erro:' + e);
-                })
+        // if (validarCampos()) {
+        let obj = {
+            nome: inputNome.value,
+            email: inputEmail.value,
+            senha: inputSenha.value,
+            perfil: selPerfil.value,
+            ativo: cbAtivo.checked
         }
+
+        let stringObj = JSON.stringify(obj);
+
+        fetch('/usuarios/cadastrar', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: stringObj
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    alert('Usuário cadastrado com sucesso');
+                }
+                else {
+                    alert('Erro!')
+                }
+            })
+            .catch(function (e) {
+                console.error('Erro:' + e);
+            })
+        // }
     }
 })
