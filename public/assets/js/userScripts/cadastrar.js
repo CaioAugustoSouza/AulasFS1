@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnCadastrar.addEventListener('click', cadastrar);
 
+    function limparValidacao() {
+        document.getElementById('msgErro').innerHTML = '';
+        document.getElementById('inputNome').style['border-color'] = '#697a8d';
+        document.getElementById('inputEmail').style['border-color'] = '#697a8d';
+        document.getElementById('selPerfil').style['border-color'] = '#697a8d';
+        document.getElementById('inputSenha').style['border-color'] = '#697a8d';
+    }
 
     function validarCampos() {
         limparValidacao();
@@ -17,34 +24,25 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputEmail.value == '') {
             listaCampos.push(inputEmail)
         }
-        if (inputSenha.value == '') {
-            listaCampos.push(inputSenha)
-        }
         if (selPerfil.value == 0) {
             listaCampos.push(selPerfil)
+        }
+        if (inputSenha.value == '') {
+            listaCampos.push(inputSenha)
         }
         if (listaCampos.length == 0) {
             return true;
         }
         else {
-            for (let i = 0; listaCampos.length; i++) {
-                listaCampos[i].style['border-color'] = "red";
-                //outra opção de sintaxe
-                // listaCampos [i].style.borderColor = "red";
-                alert('Formulário não preenchido corretamente! Preencha corretamente os campos destacados!');
-                document.getElementById('msgErro').innerHTML = '<b>Preencha corretamente!</b>'
-                return false;
+            for (let i=0; i<listaCampos.length; i++){
+                listaCampos[i].style ['border-color'] = 'red';
+
             }
+            document.getElementById ('msgErro').innerHTML = "Preencha os campos em destaque corretamente!"
         }
     }
 
-    function limparValidacao() {
-        document.getElementById('msgErro') = ''
-        document.getElementById('inputEmail').style['border-color'] = '#697a8d;'
-        document.getElementById('inputNome').style['border-color'] = '#697a8d;'
-        document.getElementById('inputSenha').style['border-color'] = '#697a8d;'
-        document.getElementById('selPerfil').style['border-color'] = '#697a8d;'
-    }
+
 
     function cadastrar() {
         console.log('função cadastro');
@@ -55,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let cbAtivo = document.getElementById('cbAtivo');
 
 
-        // if (validarCampos()) {
+        if (validarCampos()) {
         let obj = {
             nome: inputNome.value,
             email: inputEmail.value,
@@ -77,6 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(function (resposta) {
                 if (resposta.ok) {
                     alert('Usuário cadastrado com sucesso');
+                    inputNome.value = ''
+                    inputEmail.value = ''
+                    inputSenha.value = ''
+                    selPerfil.value = '0'
+                    cbAtivo.checked = false
                 }
                 else {
                     alert('Erro!')
@@ -85,6 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(function (e) {
                 console.error('Erro:' + e);
             })
-        // }
+        }
     }
 })

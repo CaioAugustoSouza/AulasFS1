@@ -8,6 +8,7 @@ const expressEjsLayout = require('express-ejs-layouts')
 const app = express ();
 
 app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 app.set ('view engine', 'ejs');
 app.set ('layout','./layout');
