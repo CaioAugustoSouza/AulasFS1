@@ -22,3 +22,4 @@ app.use('/usuarios', routerUsuarios);
 app.listen ( 5000, function (){
     console.log('Servido está funcionando' );
 })                                                  
+

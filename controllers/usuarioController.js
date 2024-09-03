@@ -1,9 +1,9 @@
 const UsuarioModel = require('../models/usuarioModel')
 
 class UsuarioController {
-    listarUsuarios(req, res) {
+    async listarUsuarios(req, res) {
         let usuarioModel = new UsuarioModel();
-        let listaUsuarios = usuarioModel.listar();
+        let listaUsuarios = await usuarioModel.listar();
         res.render('usuarios/listar.ejs', { usuarios: listaUsuarios })
     }
     usuarioView(req, res) {
