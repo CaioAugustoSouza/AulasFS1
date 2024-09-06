@@ -13,8 +13,8 @@ class UsuarioModel {
     constructor (id, nome, email, senha, ativo, perfil_id){
         this.#id = id;
         this.#nome = nome;
-        this.#senha = senha;
         this.#email = email;
+        this.#senha = senha;
         this.#ativo = ativo;
         this.#perfil_id = perfil_id;
     }
