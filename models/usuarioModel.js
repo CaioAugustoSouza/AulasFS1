@@ -33,7 +33,7 @@ class UsuarioModel {
         this.#nome = novo_nome
     }
     // get e set senha 
-    get id () {
+    get senha () {
         return this.#senha;
     }
     set senha (novo_senha){
