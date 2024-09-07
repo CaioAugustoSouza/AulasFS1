@@ -1,8 +1,6 @@
 
 const Database = require ('../Utils/database.js');
 
-
-
 class UsuarioModel {
     #id
     #nome

@@ -25,8 +25,9 @@
     <div class="col-sm-10">
       <select class="form-select" name="selPerfil" id="selPerfil">
         <option value="0">Selecione uma opção</option>
-        <option value="1">Admin</option>
-        <option value="2">Visitante</option>
+        <% for (let per of perfil) { %>
+          <option value='<%= per.per_id %> '><%= per.per_descricao %> </option>
+        <% } %>
       </select>
     </div>
   </div>

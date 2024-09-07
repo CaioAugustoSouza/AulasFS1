@@ -1,4 +1,5 @@
 const UsuarioModel = require('../models/usuarioModel')
+const PerfilModel = require ('../models/perfilModel');
 
 class UsuarioController {
     async listarUsuarios(req, res) {
@@ -9,8 +10,10 @@ class UsuarioController {
     usuarioView(req, res) {
         res.render('usuarios/home.ejs');
     }
-    cadastrarView(req, res) {
-        res.render('usuarios/cadastrar.ejs');
+    async cadastrarView(req, res) {
+        let perfilModel = new PerfilModel ();
+        let listaPerfil = await perfilModel.listar ()
+        res.render('usuarios/cadastrar.ejs', {perfil: listaPerfil});
     }
     cadastrar(req, res) {
         let ok;
