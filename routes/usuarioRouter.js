@@ -10,5 +10,6 @@ router.get('/', ctrl.usuarioView);
 router.get('/listar', ctrl.listarUsuarios);
 router.get('/cadastrar', ctrl.cadastrarView);
 router.post ('/cadastrar', ctrl.cadastrar);
+router.get ('/:id', ctrl.excluir);
 
 module.exports = router

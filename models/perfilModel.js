@@ -35,16 +35,6 @@ class PerfilModel {
         }
         return listaPerfil;
     }
-    async gravar () {
-
-    }
-    async atualizar () {
-
-    }
-    async excluir () {
-
-    }
-
 }
 
 module.exports = PerfilModel

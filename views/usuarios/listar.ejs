@@ -1,3 +1,4 @@
+<script src="/assets/js/userScripts/scriptExclusao.js"></script>
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
@@ -19,6 +20,8 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Ativo</th>
+                            <th>Perfil</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -33,6 +36,8 @@
                                 <%= 'Inativo' %>                                    
                                 <% } %>
                             </td>
+                            <td><%= usuarios[i].perfil_descricao %></td>
+                            <td><button data-id="<%= usuarios[i].id %>" class="btn btn-danger btn-exlusao">x</button></td>
                         </tr>
                         <% }  %>
                     </tbody>

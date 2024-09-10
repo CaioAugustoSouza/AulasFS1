@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(function (resposta) {
                 if (resposta.ok) {
-                    alert('Usuário cadastrado com sucesso');
+                    alert(resposta.msgm);
                     inputNome.value = ''
                     inputEmail.value = ''
                     inputSenha.value = ''
@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     cbAtivo.checked = false
                 }
                 else {
-                    alert('Erro!')
+                    alert(esposta.msgm)
                 }
             })
             .catch(function (e) {
-                console.error('Erro:' + e);
+                console.error('Erro ao tentar fazer a requisição: ' + e);
             })
         }
     }

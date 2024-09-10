@@ -15,15 +15,30 @@ class UsuarioController {
         let listaPerfil = await perfilModel.listar ()
         res.render('usuarios/cadastrar.ejs', {perfil: listaPerfil});
     }
-    cadastrar(req, res) {
+    async cadastrar(req, res) {
         let ok;
         if (req.body.nome && req.body.email && req.body.senha && req.body.perfil && req.body.perfil > 0) {
-            ok = true
+            let usuario = new UsuarioModel ();
+            usuario.nome = req.body.nome;
+            usuario.email = req.body.email;
+            usuario.senha = req.body.senha;
+            usuario.ativo = req.body.ativo;
+            usuario.perfil_id = req.body.perfil;
+            let result = await usuario.gravar();
+            if (result){
+                res.send ({ok:true, msgm:'Cadastro realizado com sucesso'})
+            }
+            else {
+                res.send ({ok:false, msgm:'Erro ao cadastrar'})
+            }
         }
         else {
-            ok = false
+            res.send ({ok: false, msgm: 'Informações incorretas'});
         }
-        res.send ({ok:ok})
+    }
+    async excluir (req, res){
+        // recebe parametro de exclusão
+        let usuarioModel = new UsuarioModel();
     }
 }
 
