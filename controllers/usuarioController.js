@@ -37,8 +37,22 @@ class UsuarioController {
         }
     }
     async excluir (req, res){
-        // recebe parametro de exclusão
+        // recebe parametro de 
+        let id = req.params.id;
         let usuarioModel = new UsuarioModel();
+        let result = await usuarioModel.excluir(id)
+        let msg = '';
+        if (result){
+            msg = 'Usuário excluído com sucesso!';
+        }
+        else {
+            msg = 'Erro ao excluir usuário';
+        }
+        res.send ({ok:result, msg :msg});
+
+    }
+    async atualizarView (){
+        
     }
 }
 

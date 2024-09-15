@@ -100,7 +100,6 @@ class UsuarioModel {
         let valores = [id];
         let result = await db.ExecutaComandoNonQuery(sql, valores);
         return result;
-
     }
 }
 
