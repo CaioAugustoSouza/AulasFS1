@@ -57,7 +57,7 @@ class UsuarioController {
         let usuario = new UsuarioModel ();
         usuario = await usuario.obter(id);
         let lista = await perfil.listar ();
-        res.render('usuarios/cadastrar.ejs');
+        res.render('usuarios/cadastrar.ejs', {perfis: lista, usuarioAlteracao: usuario});
     }
 }
 
