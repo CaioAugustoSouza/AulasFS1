@@ -1,4 +1,3 @@
-
 const Database = require('../Utils/database.js');
 let db = new Database();
 class UsuarioModel {
@@ -100,6 +99,26 @@ class UsuarioModel {
         let valores = [id];
         let result = await db.ExecutaComandoNonQuery(sql, valores);
         return result;
+    }
+    async obter (id){
+        let sql = `select * from tb_usuario where usu_id = ?` //comando sql
+        let valores = [id];
+        let result = await db.ExecutaComando(sql, valores);
+        if (result.length>0){
+            return new UsuarioModel (
+                result[0]['usu_id'],
+                result[0]['usu_nome'],
+                result[0]['usu_email'],
+                result[0]['usu_senha'],
+                result[0]['usu_ativo'],
+                result[0]['per_id'],
+            )
+        }
+        return null;
+    }
+
+    async atualizar (){
+        
     }
 }
 

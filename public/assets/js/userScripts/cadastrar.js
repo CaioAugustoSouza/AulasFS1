@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: { 'Content-type': 'application/json' },
             body: stringObj
         })
-            .then(function (resposta) {
+            .then(resposta => {
                 return resposta.json();
             })
-            .then(function (resposta) {
+            .then(resposta => {
                 if (resposta.ok) {
                     alert(resposta.msgm);
                     inputNome.value = ''
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     cbAtivo.checked = false
                 }
                 else {
-                    alert(esposta.msgm)
+                    alert(resposta.msgm)
                 }
             })
             .catch(function (e) {

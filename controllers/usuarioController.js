@@ -26,10 +26,10 @@ class UsuarioController {
             usuario.perfil_id = req.body.perfil;
             let result = await usuario.gravar();
             if (result){
-                res.send ({ok:true, msgm:'Cadastro realizado com sucesso'})
+                res.send ({ok:true, msgm:`Usuário ${usuario.nome} cadastrado com sucesso`})
             }
             else {
-                res.send ({ok:false, msgm:'Erro ao cadastrar'})
+                res.send ({ok:false, msgm:'Erro ao cadastrar usuário'})
             }
         }
         else {
@@ -51,8 +51,13 @@ class UsuarioController {
         res.send ({ok:result, msg :msg});
 
     }
-    async atualizarView (){
-        
+    async atualizarView (req, res){
+        let id = req.params.id;
+        let perfil = new PerfilModel ();
+        let usuario = new UsuarioModel ();
+        usuario = await usuario.obter(id);
+        let lista = await perfil.listar ();
+        res.render('usuarios/cadastrar.ejs');
     }
 }
 
