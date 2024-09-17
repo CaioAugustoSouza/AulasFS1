@@ -1,52 +1,119 @@
 <script src="/assets/js/userScripts/cadastrar.js"></script>
+<script src="/assets/js/userScripts/scriptAtualizar.js"></script>
 
-<form>
-  <div class="row mb-3">
-    <div class="col-sm-2"></div>
-    <div style="color: red" id="msgErro" class="col-sm-10">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label class="col-sm-2 col-form-label" for="inputNome">Nome</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Nome" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label class="col-sm-2 col-form-label" for="inputEmail">Email</label>
-    <div class="col-sm-10">
-      <div class="input-group input-group-merge">
-        <input type="text" name="inputEmail" id="inputEmail" class="form-control" placeholder="email@provedor.com" />
+<% if (typeof usuarioAlteracao != 'undefined' ) { %>
+  <form>
+    <input type="hidden" value=<%= usuarioAlteracao.id %> id='inputId'>
+    <div class="row mb-3">
+      <div class="col-sm-2"></div>
+      <div style="color: red" id="msgErro" class="col-sm-10">
       </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="slePerfil" class="col-sm-2 col-form-label">Perfil</label>
-    <div class="col-sm-10">
-      <select class="form-select" name="selPerfil" id="selPerfil">
-        <option value="0">Selecione uma opção</option>
-        <% for (let per of perfil) { %>
-          <option value='<%= per.per_id %>'><%= per.per_descricao %> </option>
-        <% } %>
-      </select>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputNome">Nome</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Nome"
+          value="<%= usuarioAlteracao ? usuarioAlteracao.nome : '' %>" />
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label class="col-sm-2 col-form-label" for="inputSenha">Senha</label>
-    <div class="col-sm-10">
-      <input type="password" id="inputSenha" name="inputSenha" class="form-control phone-mask"
-        placeholder="*********" />
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputEmail">Email</label>
+      <div class="col-sm-10">
+        <div class="input-group input-group-merge">
+          <input type="text" name="inputEmail" id="inputEmail" class="form-control" placeholder="email@provedor.com"
+            value="<%= usuarioAlteracao ? usuarioAlteracao.email : '' %>" />
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="row mb-3">
+      <label for="slePerfil" class="col-sm-2 col-form-label">Perfil</label>
+      <div class="col-sm-10">
+        <select class="form-select" name="selPerfil" id="selPerfil">
+          <option value="0">Selecione uma opção</option>
+          <% for (let per of perfil) { %>
+            <option value='<%= per.per_id %>' <%=usuarioAlteracao ? (usuarioAlteracao.perfil_id==per.per_id ? 'selected'
+              : '' ) : '' %>><%= per.per_descricao %>
+            </option>
+            <% } %>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label" for="inputSenha">Senha</label>
+      <div class="col-sm-10">
+        <input type="password" id="inputSenha" name="inputSenha" class="form-control phone-mask" placeholder="*********"
+          value="<%= usuarioAlteracao ? usuarioAlteracao.nome : '' %>" />
+      </div>
+    </div>
 
-  <div class="row mb-3">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-10"><label for="cbAtivo"><input type="checkbox" id="cbAtivo" name="cbAtivo"
-          class="defaultCheck3"> Ativo</label></div>
-  </div>
-  <div class="row justify-content-end">
-    <div class="col-sm-10">
-      <button type="button" class="btn btn-primary" id="btnCadastrar">Cadastrar</button>
+    <div class="row mb-3">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10"><label for="cbAtivo"><input
+            checked="<%= usuarioAlteracao ? (usuarioAlteracao.ativo==1 ? 'checked' : '' ) : '' %>" type="checkbox"
+            id="cbAtivo" name="cbAtivo" class="defaultCheck3"> Ativo</label></div>
     </div>
-  </div>
-</form>
+    <div class="row justify-content-end">
+      <div class="col-sm-10">
+        <button type="button" class="btn btn-primary" id="btnAtualizar">
+          <%=atualizar ? 'Atualizar' : 'Cadastrar' %>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <% } else { %>
+
+    <form>
+      <div class="row mb-3">
+        <div class="col-sm-2"></div>
+        <div style="color: red" id="msgErro" class="col-sm-10">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label" for="inputNome">Nome</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Nome"/>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label" for="inputEmail">Email</label>
+        <div class="col-sm-10">
+          <div class="input-group input-group-merge">
+            <input type="text" name="inputEmail" id="inputEmail" class="form-control" placeholder="email@provedor.com"/>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="slePerfil" class="col-sm-2 col-form-label">Perfil</label>
+        <div class="col-sm-10">
+          <select class="form-select" name="selPerfil" id="selPerfil">
+            <option value="0">Selecione uma opção</option>
+            <% for (let per of perfil) { %>
+              <option value='<%= per.per_id %>'><%= per.per_descricao %>
+              </option>
+              <% } %>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label" for="inputSenha">Senha</label>
+        <div class="col-sm-10">
+          <input type="password" id="inputSenha" name="inputSenha" class="form-control phone-mask"
+            placeholder="*********"/>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10"><label for="cbAtivo"><input type="checkbox"
+              id="cbAtivo" name="cbAtivo" class="defaultCheck3"> Ativo</label></div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-sm-10">
+          <button type="button" class="btn btn-primary" id="btnCadastrar">
+            Cadastrar
+          </button>
+        </div>
+      </div>
+    </form>
+    <% } %>

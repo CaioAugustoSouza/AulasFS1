@@ -12,5 +12,6 @@ router.get('/cadastrar', ctrl.cadastrarView);
 router.post ('/cadastrar', ctrl.cadastrar);
 router.get ('/atualizar/:id', ctrl.atualizarView);
 router.get ('/excluir/:id', ctrl.excluir);
+router.post ('/atualizar', ctrl.atualizar);
 
 module.exports = router

@@ -53,11 +53,33 @@ class UsuarioController {
     }
     async atualizarView (req, res){
         let id = req.params.id;
-        let perfil = new PerfilModel ();
-        let usuario = new UsuarioModel ();
+        let perfil = new PerfilModel();
+        let usuario = new UsuarioModel();
         usuario = await usuario.obter(id);
-        let lista = await perfil.listar ();
-        res.render('usuarios/cadastrar.ejs', {perfis: lista, usuarioAlteracao: usuario});
+        let lista = await perfil.listar();
+        res.render('usuarios/cadastrar.ejs', {perfil: lista, usuarioAlteracao: usuario, atualizar:true});
+    }
+    async atualizar(req, res){
+        let ok;
+        if (req.body.nome && req.body.email && req.body.senha && req.body.perfil && req.body.perfil > 0) {
+            let usuario = new UsuarioModel ();
+            usuario.nome = req.body.nome;
+            usuario.email = req.body.email;
+            usuario.senha = req.body.senha;
+            usuario.ativo = req.body.ativo;
+            usuario.perfil_id = req.body.perfil;
+            usuario.id = req.body.id
+            let result = await usuario.atualizar();
+            if (result){
+                res.send ({ok:true, msgm:`Usuário ${usuario.nome} atualizado com sucesso`})
+            }
+            else {
+                res.send ({ok:false, msgm:'Erro ao atualizar usuário'})
+            }
+        }
+        else {
+            res.send ({ok: false, msgm: 'Informações incorretas'});
+        }
     }
 }
 

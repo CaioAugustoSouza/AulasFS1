@@ -94,13 +94,13 @@ class UsuarioModel {
         let result = await db.ExecutaComandoNonQuery(sql,valores);
         return result;
     }
-    async excluir (id){
+    async excluir(id){
         let sql = `delete from tb_usuario where usu_id = ?`
         let valores = [id];
         let result = await db.ExecutaComandoNonQuery(sql, valores);
         return result;
     }
-    async obter (id){
+    async obter(id){
         let sql = `select * from tb_usuario where usu_id = ?` //comando sql
         let valores = [id];
         let result = await db.ExecutaComando(sql, valores);
@@ -117,8 +117,17 @@ class UsuarioModel {
         return null;
     }
 
-    async atualizar (){
-        
+    async atualizar(){
+        let sql = `UPDATE tb_usuario
+                    SET usu_nome = ?, 
+                        usu_email = ?, 
+                        usu_senha = ?, 
+                        usu_ativo = ?, 
+                        per_id = ?
+                    WHERE usu_id = ?;`
+        let valores = [this.#nome, this.#email, this.#senha, this.#ativo, this.#perfil_id, this.#id];
+        let result = await db.ExecutaComandoNonQuery(sql,valores);
+        return result;
     }
 }
 

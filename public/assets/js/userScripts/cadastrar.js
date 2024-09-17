@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function cadastrar() {
-        console.log('função cadastro');
         let inputNome = document.getElementById('inputNome');
         let inputEmail = document.getElementById('inputEmail');
         let inputSenha = document.getElementById('inputSenha');
