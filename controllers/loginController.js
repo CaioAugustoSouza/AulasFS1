@@ -1,13 +1,25 @@
+const UsuarioModel = require("../models/usuarioModel");
+
 class LoginController {
     loginView (req, res){
         res.render ('login.ejs', {layout: false});
     }
-    login (req, res){
-        if (req.body.email == 'admin@admin.com' && req.body.senha == '123456'){
-            res.render ('home.ejs');
+    async login (req, res){
+        let msg;
+        if (req.body.email && req.body.senha){
+            let usuario = new UsuarioModel();
+            usuario  = await usuario.validarUsuario(req.body.email, req.body.senha)
+            if (usuario){
+                res.cookie('usuarioLogado', usuario.id);
+                res.redirect('/');
+            }
+            else {
+                msg = 'Senha e/ou usuário incorreto'
+                res.render ('login.ejs', {layout: false, msg: msg});
+            }
         }
         else{
-            res.render ('login.ejs', {layout: false, msg: 'Senha e/ou usuário incorreto'});
+            res.render ('login.ejs', {layout: false, msg: msg});
         }
     }
 }

@@ -116,6 +116,22 @@ class UsuarioModel {
         }
         return null;
     }
+    async validarUsuario(email,senha){
+        let sql = `select * from tb_usuario where usu_email = ? and usu_senha = ?` //comando sql
+        let valores = [email, senha];
+        let result = await db.ExecutaComando(sql, valores);
+        if (result.length>0){
+            return new UsuarioModel (
+                result[0]['usu_id'],
+                result[0]['usu_nome'],
+                result[0]['usu_email'],
+                result[0]['usu_senha'],
+                result[0]['usu_ativo'],
+                result[0]['per_id'],
+            )
+        }
+        return null;
+    }
 
     async atualizar(){
         let sql = `UPDATE tb_usuario

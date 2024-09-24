@@ -1,11 +1,15 @@
 const express = require ('express');
 const HomeController = require ('../controllers/homeController');
+const AuthMiddleware = require('../middlewares/authmiddleware');
 
 
 const router = express.Router();
 let ctrl = new HomeController ();
 
-router.get ('/', ctrl.homeView);
+
+let auth = new AuthMiddleware();
+
+router.get ('/',auth.validar, ctrl.homeView);
 
 
 module.exports = router
