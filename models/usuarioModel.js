@@ -101,7 +101,7 @@ class UsuarioModel {
         return result;
     }
     async obter(id){
-        let sql = `select * from tb_usuario where usu_id = ?` //comando sql
+        let sql = `select * from tb_usuario u join tb_perfil p on p.per_id = u.per_id where usu_id = ?` //comando sql
         let valores = [id];
         let result = await db.ExecutaComando(sql, valores);
         if (result.length>0){
@@ -112,6 +112,7 @@ class UsuarioModel {
                 result[0]['usu_senha'],
                 result[0]['usu_ativo'],
                 result[0]['per_id'],
+                result[0]['per_descricao']
             )
         }
         return null;

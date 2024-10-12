@@ -22,6 +22,10 @@ class LoginController {
             res.render ('login.ejs', {layout: false, msg: msg});
         }
     }
+    logout (req, res){
+        res.clearCookie('usuarioLogado');
+        res.redirect('/login')
+    }
 }
 
 module.exports = LoginController;

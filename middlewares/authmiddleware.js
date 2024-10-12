@@ -9,6 +9,10 @@ class AuthMiddleware {
             let usuario = new UsuarioModel();
             usuario = await usuario.obter (idUsuario);
             if (usuario){
+                //disponibilizado para a controladora
+                req.usuario=usuario;
+                //disponibilizado no res.render
+                res.locals.usuario = usuario
                 next ();
             }
         }

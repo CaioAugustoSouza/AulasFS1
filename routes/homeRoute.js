@@ -9,7 +9,7 @@ let ctrl = new HomeController ();
 
 let auth = new AuthMiddleware();
 
-router.get ('/',auth.validar, ctrl.homeView);
+router.get ('/', auth.validar, ctrl.homeView);
 
 
 module.exports = router
